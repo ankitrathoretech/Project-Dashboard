@@ -11,6 +11,6 @@ class ApplicationController < ActionController::Base
     # For sign in
     devise_parameter_sanitizer.permit(:sign_in, keys: [ :username ])
     # For sign up (if needed later)
-    devise_parameter_sanitizer.permit(:sign_up, keys: [ :username, :salt ])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [ :username, :salt, :email, :raw_password, :password, :password_confirmation ])
   end
 end

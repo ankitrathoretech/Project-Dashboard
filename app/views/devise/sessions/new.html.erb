@@ -1,0 +1,43 @@
+<div class="max-w-md mx-auto mt-16 p-6 bg-white shadow-lg rounded-lg"
+     data-controller="login">
+  <h2 class="text-2xl font-semibold mb-4 text-center">Log in</h2>
+
+  <%= form_for(resource,
+        as: resource_name,
+        url: session_path(resource_name),
+        html: { class: "space-y-4", data: { turbo: false } }) do |f| %>
+
+    <div class="mb-2">
+      <%= f.label :username, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :username,
+            class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+            autofocus: true,
+            autocomplete: "username",
+            data: { login_target: "username", action: "input->login#validate" } %>
+    </div>
+
+    <div class="mb-2">
+      <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.password_field :password,
+            class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+            autocomplete: "current-password" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="flex items-center">
+        <%= f.check_box :remember_me, class: "h-4 w-4 text-blue-600 border-gray-300 rounded" %>
+        <%= f.label :remember_me, class: "ml-2 block text-sm text-gray-900" %>
+      </div>
+    <% end %>
+
+    <div class="text-red-600 text-sm" data-login-target="error"></div>
+
+    <div>
+      <%= f.submit "Log in",
+            class: "w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition",
+            data: { login_target: "submit" } %>
+    </div>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  <% end %>
+</div>

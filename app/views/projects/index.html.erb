@@ -1,0 +1,32 @@
+<div data-controller="projects">
+  <h1 class="text-xl font-bold mb-4">Projects</h1>
+
+  <div class="flex justify-end mb-6">
+    <div class="flex flex-wrap gap-4">
+      <!-- Sort Option Dropdown -->
+      <div>
+        <label for="sort_option" class="block text-sm font-medium text-gray-700 mb-1">Sort By</label>
+        <%= select_tag :sort_option,
+          options_for_select(Project::SORT_OPTION, selected: params[:sort_option]),
+          id: "sort_option",
+          class: "block w-48 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+          data: { action: "change->projects#sortChanged", projects_target: "sortOption" } %>
+      </div>
+
+      <!-- Sort Type Dropdown -->
+      <div>
+        <label for="sort_type" class="block text-sm font-medium text-gray-700 mb-1">Order</label>
+        <%= select_tag :sort_type,
+          options_for_select(Project::SORTING_TYPE, selected: params[:sort_type]),
+          id: "sort_type",
+          class: "block w-48 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+          data: { action: "change->projects#sortChanged", projects_target: "sortType" } %>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="projects_list">
+    <%= render partial: "projects_list", locals: { projects: @projects } %>
+  </div>
+</div>
